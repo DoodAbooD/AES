@@ -1,0 +1,5 @@
+The code written in this build (not the libraries and/or methods implemented) is provided for free,
+use it in your work responsibly, 
+mention sources when you have a chance
+
+
