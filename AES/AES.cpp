@@ -1090,12 +1090,20 @@ int main(int argc, char *argv[]) {
 	
 	//Seeking 'data OK' flag
 	ustring::iterator uitr = utext.end();
-	while (*uitr != '*') uitr--;
+	while (*uitr != '*') {
+		if (uitr == utext.begin()) {
+			cout << endl << "ERROR: DECRYPTION FAILED, INCORRECT PASSWORD OR INVALID FILE (COULD BE ENCRYPTED ELSEWHERE)." << endl;
+			delete[] cstream;
+			PlainFile.close();
+			remove(argv[2]); //Delete attempted file
+			return 0;
+		}
+		uitr--; }
 	string check;
 	fori(7) check.push_back(*++uitr);
 	if (check != "DOK7895") {
 		cout << "check = " << check << endl;
-		cout << endl << "ERROR: DECRYPTION FAILED, PROBABLY INCORRECT PASSWORD" << endl;
+		cout << endl << "ERROR: DECRYPTION FAILED, INCORRECT PASSWORD OR INVALID FILE (COULD BE ENCRYPTED ELSEWHERE)." << endl;
 		delete[] cstream;
 		PlainFile.close();
 		remove(argv[2]); //Delete attempted file
